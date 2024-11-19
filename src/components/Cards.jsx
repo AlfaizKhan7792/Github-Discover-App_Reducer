@@ -1,8 +1,8 @@
 
 import React from "react";
-import { Box, Avatar, Typography } from "@mui/material";
+import { Box, Avatar, Typography, Button } from "@mui/material";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CardContainer = styled(Box)({
   width: "300px",
@@ -13,6 +13,10 @@ const CardContainer = styled(Box)({
   flexDirection: "column",
   alignItems: "center",
   color: "#FFFFFF",
+  transition: "transform 0.2s", 
+  "&:hover": {
+    transform: "translateY(-5px)",
+  },
 });
 
 const ProfileAvatar = styled(Avatar)({
@@ -21,25 +25,42 @@ const ProfileAvatar = styled(Avatar)({
   marginBottom: "10px",
 });
 
-const Cards = ({ Details }) => {  // Change the prop name to 'Details'
+const Cards = ({ card }) => {  
 
-  console.log(Details);
+  const navigate = useNavigate(); // Add this hook
+
+  const handleViewProfile = () => {
+    if (card?.login) {
+      console.log("Navigating to profile of:", card.login);
+      navigate(`/userprofile/${card.login}`);
+    }
+  };
 
   return (
     <CardContainer>
-      <ProfileAvatar src={Details?.avatar_url || "https://avatars.githubusercontent.com/u/583231?v=4"} alt="Profile Picture" />
+      <ProfileAvatar src={card?.avatar_url || "https://avatars.githubusercontent.com/u/583231?v=4"} alt="Profile Picture" />
       <Typography variant="h6" sx={{ marginTop: "10px", fontWeight: "bold" }}>
-        {Details?.login}
+        {card?.login}
       </Typography>
 
       <Link
-        to={{
-          pathname: "/userprofile",
-          state: { Details }, // Pass the 'Details' data via state
-        }}
-        style={{ marginTop: "5px", textDecoration: "none", color: "#FFFFFF" }}
+        to={`/userprofile/${card?.login}`}
+          style={{ marginTop: "5px", textDecoration: "none", color: "#FFFFFF" }}
+        
       >
-        Visit Profile
+       <Button 
+          variant="contained" 
+          fullWidth
+          onClick={handleViewProfile}
+          sx={{
+            backgroundColor: "#0079ff",
+            "&:hover": {
+              backgroundColor: "#0056b3"
+            }
+          }}
+        >
+          View Profile
+        </Button>
       </Link>
     </CardContainer>
   );

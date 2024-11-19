@@ -3,22 +3,21 @@ import CardDataReducer from "./CardDataReducer";
 
 const CardDataContext = createContext()
 
-export const CardDataProvider = ({children}) =>{
+export const CardDataProvider = ({children}) => {
 
-const initialState = {
-    Details : []
-}
+    const initialState = {
+        Details: null,
+        user : [],
+        loading : false,
+        error : null
+    }
 
-const [state , dispatch] = useReducer( CardDataReducer , initialState)
-
-// console.log("Current State:", state);
-
-return(
-    <CardDataContext.Provider value={{...state , dispatch}}>
-     {children}
-</CardDataContext.Provider>
-)
-
+    const [state , dispatch] = useReducer(CardDataReducer , initialState)
+    return (
+        <CardDataContext.Provider value={{...state , dispatch}}>
+            {children}
+        </CardDataContext.Provider>
+    )
 }
 
 export default CardDataContext;
