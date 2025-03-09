@@ -262,6 +262,7 @@ const UserProfileCard = () => {
           </Typography>
           <Link href={Details?.blog || "#"} underline="none" sx={{ color: "#0079ff" }}>
             {Details?.blog || "N/A"}
+            {Details.repos_url}
           </Link>
           <Typography variant="body2" sx={{ color: "#A3A3A3" }}>
             {Details?.location}

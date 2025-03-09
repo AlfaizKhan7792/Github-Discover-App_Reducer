@@ -131,7 +131,7 @@ const Home = () => {
         </Box>
       </FormControl>
 
-      {!Details ? (
+      {!Details && Details?.length === 0 ? (
         <Box>
          <Skeleton variant="circular" width={60} height={60} sx={{ marginBottom: "10px" }} />
           <Skeleton variant="text" width="60%" height={30} sx={{ marginTop: "10px" }} />
@@ -140,21 +140,11 @@ const Home = () => {
       ) : (
 
         <div>
-        {
-          Details.length === 0 ? (
-            <Box>
-              <Skeleton variant="circular" width={60} height={60} sx={{ marginBottom: "10px" }} />
-              <Skeleton variant="text" width="60%" height={30} sx={{ marginTop: "10px" }} />
-              <Skeleton variant="text" width="40%" height={20} sx={{ marginTop: "5px" }} />
-            </Box>
-          ) : (
             <div style={{display : 'flex' , flexWrap : 'wrap', gap : '10px', alignItems : 'center' , justifyContent : 'center'}} >
             {
               Details?.map((card) => <Cards key={card.id} card={card} />)
             }
             </div>
-          )
-        }
       </div>
 
       )}

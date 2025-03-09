@@ -12,7 +12,7 @@ export const fetchGitHubUsers = async (username) => {
   
 
 export const fetchGitHubUserData = async (username) => {
-    console.log("Action received username:", username); // Debug log
+    // console.log("Action received username:", username); // Debug log
 
     if (!username) {
         console.error("Username is missing");
